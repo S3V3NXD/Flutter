@@ -6,7 +6,7 @@ class WorklistController = WorklistControllerBase with _$WorklistController;
 abstract class WorklistControllerBase with Store {
 
   @observable
-  String activity = 'Nome';
+  String activity = 'Nome base';
 
   @observable
   ObservableList <String> activities = ObservableList.of([]);
@@ -19,6 +19,11 @@ abstract class WorklistControllerBase with Store {
   @action
   void setActivity(String text) {
     activity = text;
+  }
+
+  @action
+  void editActivity(String text, int pos) {
+    activities[pos] = text;
   }
 
 

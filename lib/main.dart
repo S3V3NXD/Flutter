@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'controller_worklist.dart';
 import 'addActivity.dart';
+import 'editActivity.dart';
 import 'package:mobx/mobx.dart';
 
 void main() {
@@ -39,8 +40,27 @@ class MyHomePage extends StatelessWidget {
               title: Row(
                 children:<Widget>[
                   Text(works.activities.toList()[i]),
-                  IconButton(icon: Icon(Icons.edit)),
-                  IconButton(icon: Icon(Icons.delete))
+                  Row(
+                      children:<Widget>[
+                        SizedBox(width: 280),
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => editActivity(works,i, works.activities.toList()[i]),
+                              ),
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            works.activities.removeAt(i);
+                          },
+                        ),
+                      ],
+                  ),
                 ],
               ),
             ),
@@ -49,11 +69,9 @@ class MyHomePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-            // works.setActivity('text');
-            // works.addWork();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => addActivity(),
+                builder: (context) => addActivity(works),
               ),
             );
           },

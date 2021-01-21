@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'controller_worklist.dart';
 
-class addActivity extends StatelessWidget {
-  final myController = TextEditingController();
+class editActivity extends StatelessWidget {
   WorklistController control;
-
-  addActivity(control) {
+  int pos;
+  String value;
+  editActivity(control,i,value) {
     this.control = control;
+    this.pos = i;
+    this.value = value;
   }
 
   @override
   Widget build(BuildContext context) {
+    final myController = TextEditingController(text: value);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -43,13 +46,13 @@ class addActivity extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           control.setActivity(myController.text);
-                          control.addWork();
+                          control.editActivity(control.activity, pos);
                           Navigator.of(context).pop(context);
                         },
                         style: ElevatedButton.styleFrom(shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0),
                         ),),
-                        child: Text('Adicionar Tarefa'),
+                        child: Text('Editar Tarefa'),
                       ),
                     ),
                   ],
